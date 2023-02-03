@@ -1,6 +1,38 @@
 <div class="container py-4">
-  <app-product></app-product>
-  <app-product></app-product>
-  <app-product></app-product>
-  <app-product></app-product>
+  <div *ngIf="getProducts().length > 0; else noProducts">
+    <ng-template [ngTemplateOutlet]="productList" [ngTemplateOutletContext]="{products: getProducts()}"></ng-template>
+    <ng-template [ngTemplateOutlet]="populerProductList" [ngTemplateOutletContext]="{products: getProducts()}"></ng-template>
+  </div>
+
+  <ng-template #noProducts>
+    <p class="alert alert-danger">
+      Listelenecek ürün yok
+    </p>
+  </ng-template>
+
+  <ng-template #productList let-products = "products">
+    <h2>All Products</h2>
+    <div *ngFor="let product of products">
+      <app-product [product]="product"></app-product>
+    </div>
+  </ng-template>
+
+  <ng-template #populerProductList let-products="products">
+    <h2>Populer Products</h2>
+    <hr>
+    <div class="row">
+        <div class="col-3 my-4" *ngFor="let product of products">
+          <div class="card my-4 p-2">
+              <div>
+                <img [src]="product.imgUrl" alt="" class="w-100">
+              </div>
+              <div>
+                <h2>{{product.productName}}</h2>
+                <p>{{product.description}}</p>
+              </div>
+          </div>
+        </div>
+    </div>
+  </ng-template>
+
 </div>

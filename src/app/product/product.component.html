@@ -1,11 +1,11 @@
 <div class="card my-4">
   <div class="row">
     <div class="col-md-3">
-      <img src="../../assets/phone.jpg" alt="">
+      <img [src]="product.imgUrl" alt="">
     </div>
     <div class="col-md-9">
-      <h2>Lorem, ipsum.</h2>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe incidunt est velit illum aliquid voluptatibus a officiis numquam mollitia quisquam?</p>
+      <h2>{{product.productName}}</h2>
+      <p>{{product.description}}</p>
     </div>
   </div>
 </div>
