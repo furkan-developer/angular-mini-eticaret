@@ -1,7 +1,7 @@
 <div class="container py-4">
-  <div *ngIf="getProducts().length > 0; else noProducts">
-    <ng-template [ngTemplateOutlet]="productList" [ngTemplateOutletContext]="{products: getProducts()}"></ng-template>
-    <ng-template [ngTemplateOutlet]="populerProductList" [ngTemplateOutletContext]="{products: getProducts()}"></ng-template>
+  <div *ngIf="products.length > 0; else noProducts">
+    <ng-template [ngTemplateOutlet]="productList" [ngTemplateOutletContext]="{products: products}"></ng-template>
+    <ng-template [ngTemplateOutlet]="populerProductList" [ngTemplateOutletContext]="{products: products}"></ng-template>
   </div>
 
   <ng-template #noProducts>
