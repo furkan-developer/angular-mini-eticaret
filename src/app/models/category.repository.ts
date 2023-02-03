@@ -9,7 +9,7 @@ export class CategoryRepository{
     {id: 4, name: "Category 4"},
   ]
 
-  getProducts():Category[]{
+  getCategories():Category[]{
     return this.categories;
   }
 
