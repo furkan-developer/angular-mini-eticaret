@@ -1,4 +1,8 @@
 <div class="container py-4">
+  <div *ngIf="basket.length > 0" class="card border-success p-4">
+      <app-product *ngFor="let item of basket" [product]="item"></app-product>
+  </div>
+
   <div *ngIf="products.length > 0; else noProducts">
     <ng-template [ngTemplateOutlet]="productList" [ngTemplateOutletContext]="{products: products}"></ng-template>
     <ng-template [ngTemplateOutlet]="populerProductList" [ngTemplateOutletContext]="{products: products}"></ng-template>
@@ -13,7 +17,7 @@
   <ng-template #productList let-products = "products">
     <h2>All Products</h2>
     <div *ngFor="let product of products">
-      <app-product [product]="product"></app-product>
+      <app-product [product]="product" (selectedProduct)="addBasket($event)"></app-product>
     </div>
   </ng-template>
 
@@ -36,3 +40,4 @@
   </ng-template>
 
 </div>
+
