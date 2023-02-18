@@ -26,4 +26,15 @@ export class ProductlistComponent {
     this.basket.push(product);
   }
 
+  onRemoveProduct(product: Product) {
+    console.log("Trigger event");
+
+    const index : number = this.basket.indexOf(product);
+    if(index !== -1){
+      console.log("Current product");
+
+      this.basket.splice(index,1);
+    }
+    console.log(this.basket);
+  }
 }
