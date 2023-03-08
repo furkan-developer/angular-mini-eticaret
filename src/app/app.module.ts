@@ -8,6 +8,8 @@ import { ProductComponent } from './product/product.component';
 import { CategorysideComponent } from './categoryside/categoryside.component';
 import { BasketProductComponent } from './basket-product/basket-product.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './home/home.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { AppRoutingModule } from './app-routing.module';
     ProductlistComponent,
     ProductComponent,
     CategorysideComponent,
-    BasketProductComponent
+    BasketProductComponent,
+    HomeComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
