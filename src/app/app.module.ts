@@ -10,6 +10,7 @@ import { BasketProductComponent } from './basket-product/basket-product.componen
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './error/error.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ErrorComponent } from './error/error.component';
     CategorysideComponent,
     BasketProductComponent,
     HomeComponent,
-    ErrorComponent
+    ErrorComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
