@@ -5,11 +5,13 @@ import { HomeComponent } from './home/home.component';
 import { ProductlistComponent } from './productlist/productlist.component';
 import { ProductComponent } from './product/product.component';
 import { ErrorComponent } from './error/error.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 // Create routing shema
 const routers: Routes = [
   {path:"", component: HomeComponent},
   {path:"productlist", component: ProductlistComponent},
+  {path:"productlist/:id", component: ProductDetailComponent},
   {path:"**", component: ErrorComponent}
 ];
 
