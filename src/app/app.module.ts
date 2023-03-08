@@ -7,6 +7,7 @@ import { ProductlistComponent } from './productlist/productlist.component';
 import { ProductComponent } from './product/product.component';
 import { CategorysideComponent } from './categoryside/categoryside.component';
 import { BasketProductComponent } from './basket-product/basket-product.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { BasketProductComponent } from './basket-product/basket-product.componen
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
