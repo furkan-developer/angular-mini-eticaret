@@ -11,7 +11,7 @@ export class CategorysideComponent {
 
   categories: Category[];
   categoryRepository: CategoryRepository;
-  selectedCategory: Category;
+  selectedCategory: Category | null;
   isActiveAllCategories: boolean = true;
 
   constructor() {
@@ -27,5 +27,10 @@ export class CategorysideComponent {
     this.isActiveAllCategories = false;
     if(category != this.selectedCategory)
       this.selectedCategory = category;
+  }
+
+  selectAllCategories(){
+    this.isActiveAllCategories = true;
+    this.selectedCategory = null;
   }
 }
