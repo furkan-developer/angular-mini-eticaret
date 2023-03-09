@@ -6,7 +6,7 @@
           All Categories
         </td>
       </tr>
-      <tr *ngFor="let category of categories" (click)="selectCategory(category)" [class.table-active]="category == selectedCategory">
+      <tr *ngFor="let category of categories" (click)="selectCategory(category)" [class.table-active]="category == selectedCategory" routerLink="productlist/category/{{category.id}}">
         <td>{{category.name}}</td>
       </tr>
     </tbody>
