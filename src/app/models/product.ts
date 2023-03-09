@@ -4,5 +4,6 @@ export interface Product{
   price: number,
   imgUrl: string,
   isActive: boolean,
-  description: string
+  description: string,
+  categoryId: number
 }
