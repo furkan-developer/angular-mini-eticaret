@@ -1,5 +1,6 @@
 import { identifierName } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/product';
 import { ProductRepository } from '../models/product.repository';
 
@@ -8,7 +9,7 @@ import { ProductRepository } from '../models/product.repository';
   templateUrl: './productlist.component.html',
   styleUrls: ['./productlist.component.css']
 })
-export class ProductlistComponent {
+export class ProductlistComponent implements OnInit{
 
   title: String = "ShoopApp";
 
@@ -16,9 +17,21 @@ export class ProductlistComponent {
   products: Product[];
   basket : Product[] = [];
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
     this.productRepository = new ProductRepository();
-    this.products = this.productRepository.getProducts();
+    this.products = this.getAllProducts();
+  }
+
+  ngOnInit(): void {
+    this.route.params.subscribe((param)=>{
+      if(param["id"]){
+        this.products = this.productRepository.getProducts().filter(p=> p.categoryId == param["id"]);
+      }
+    });
+  }
+
+  getAllProducts(){
+    return this.productRepository.getProducts();
   }
 
   addBasket(product: Product){
