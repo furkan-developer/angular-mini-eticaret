@@ -11,9 +11,21 @@ export class CategorysideComponent {
 
   categories: Category[];
   categoryRepository: CategoryRepository;
+  selectedCategory: Category;
+  isActiveAllCategories: boolean = true;
 
   constructor() {
     this.categoryRepository = new CategoryRepository();
-    this.categories = this.categoryRepository.getCategories();
+    this.categories = this.getAllCategories();
+  }
+
+  getAllCategories():Category[]{
+    return this.categoryRepository.getCategories();
+  }
+
+  selectCategory(category: Category){
+    this.isActiveAllCategories = false;
+    if(category != this.selectedCategory)
+      this.selectedCategory = category;
   }
 }
