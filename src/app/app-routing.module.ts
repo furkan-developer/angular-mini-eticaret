@@ -12,6 +12,7 @@ const routers: Routes = [
   {path:"", component: HomeComponent},
   {path:"productlist", component: ProductlistComponent},
   {path:"productlist/:id", component: ProductDetailComponent},
+  {path:"productlist/category/:id", component: ProductlistComponent},
   {path:"**", component: ErrorComponent}
 ];
 
