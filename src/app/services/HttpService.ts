@@ -13,4 +13,8 @@ export class HttpService{
   insertProduct(product: Product):Observable<object>{
     return this.http.post(this.url,product);
   }
+
+  getAllProducts():Observable<object>{
+    return this.http.get(this.url);
+  }
 }
