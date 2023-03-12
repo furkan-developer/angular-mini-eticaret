@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { ProductlistComponent } from '../productlist/productlist.component';
 import { HttpService } from '../services/HttpService';
 
 @Component({
@@ -16,11 +17,13 @@ export class NavbarComponent {
   }
 
   addProduct(){
-    let product = {id: 11, productName: "Product 11", price: 50000, imgUrl: "../../assets/phone.jpg", isActive: true, description: "Lorem ipsum, dolor",categoryId:3};
+    let product = {productName: "Product 2", price: 50000, imgUrl: "../../assets/phone.jpg", isActive: true, description: "Lorem ipsum, dolor",categoryId:1};
 
    this.httpSercive.insertProduct(product).subscribe(
       (recievedData)=>{
-        console.log(recievedData);
+        if(recievedData == null)
+          throw Error("Data oluşturulmadı");
+        alert(recievedData);
       }
     );
   }

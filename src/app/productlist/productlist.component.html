@@ -3,9 +3,11 @@
       <app-basket-product *ngFor="let item of basket" [product]="item" (removeProductEvent)="onRemoveProduct($event)"></app-basket-product>
   </div>
 
-  <div *ngIf="products.length > 0; else noProducts">
-    <ng-template [ngTemplateOutlet]="productList" [ngTemplateOutletContext]="{products: products}"></ng-template>
-    <ng-template [ngTemplateOutlet]="populerProductList" [ngTemplateOutletContext]="{products: products}"></ng-template>
+  <div *ngIf="products != undefined">
+    <div *ngIf="products.length > 0; else noProducts">
+      <ng-template [ngTemplateOutlet]="productList" [ngTemplateOutletContext]="{products: products}"></ng-template>
+      <ng-template [ngTemplateOutlet]="populerProductList" [ngTemplateOutletContext]="{products: products}"></ng-template>
+    </div>
   </div>
 
   <ng-template #noProducts>

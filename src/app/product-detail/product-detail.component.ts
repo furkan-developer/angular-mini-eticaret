@@ -1,32 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/product';
-import { ProductRepository } from '../models/product.repository';
+import { HttpService } from '../services/HttpService';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css']
+  styleUrls: ['./product-detail.component.css'],
+  providers: [HttpService]
 })
 export class ProductDetailComponent implements OnInit {
   product: Product;
-  productRepository: ProductRepository;
-  productId: number;
 
-  constructor(private route: ActivatedRoute) {
-    this.productRepository = new ProductRepository();
-    console.log("constructor");
-
+  constructor(private route: ActivatedRoute,private http:HttpService) {
   }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.productId = params["id"];
-    })
-    console.log("product id: " + this.productId);
-
-    this.product = this.productRepository.getProducts().filter(p => p.id == this.productId).pop();
-    console.log("product: " + this.product);
+      this.getOneProducts(params["id"]);
+    });
   }
 
+  getOneProducts(productId: string){
+    this.http.getOneProducts(productId).subscribe((recievedData)=>{
+      this.product = recievedData;
+    });
+  }
 }

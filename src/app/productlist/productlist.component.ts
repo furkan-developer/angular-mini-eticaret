@@ -1,8 +1,8 @@
 import { identifierName } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { filter } from 'rxjs';
 import { Product } from '../models/product';
-import { ProductRepository } from '../models/product.repository';
 import { HttpService } from '../services/HttpService';
 
 @Component({
@@ -15,29 +15,26 @@ export class ProductlistComponent implements OnInit{
 
   title: String = "ShoopApp";
 
-  productRepository : ProductRepository;
   products: Product[] = [];
   basket : Product[] = [];
 
   constructor(private route: ActivatedRoute,private http: HttpService) {
-    this.productRepository = new ProductRepository();
   }
 
   ngOnInit(): void {
     this.route.params.subscribe((param)=>{
-      if(param["id"]){
-        this.products = this.productRepository.getProducts().filter(p=> p.categoryId == param["id"]);
-      }
+      this.getAllProducts(param["id"]);
     });
-    this.getAllProducts();
   }
 
-  getAllProducts(){
-    this.http.getAllProducts().subscribe((recivedData)=>{
-      for(const key in recivedData){
-        this.products.push(recivedData[key]);
-        console.log(recivedData[key]);
-      }
+  getAllProducts(categoryId: number){
+    this.http.getAllProducts(categoryId).subscribe((recivedData)=>{
+      this.products = recivedData;
+    });
+  }
+
+  getOneProduct(firebaseId: string){
+    this.http.getOneProducts(firebaseId).subscribe((recievedData)=>{
     });
   }
 
