@@ -4,21 +4,24 @@ import { Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
 import { Product } from "../models/product";
 import { ProductInsertModel } from "../models/ProductInsertModel";
+import { Model } from "../models/model";
 
-@Injectable()
-export class HttpService{
+@Injectable({
+  providedIn: "root"
+})
+export abstract class HttpService{
 
-  url: string = "https://ng-onlineshop-default-rtdb.firebaseio.com";
+  url: string = "https://ng-onlineshop-d0ec6-default-rtdb.firebaseio.com/";
   constructor(private http: HttpClient) {
   }
 
-  insertProduct(product: ProductInsertModel):Observable<object>{
-    return this.http.post(`${this.url}/product.json`,product);
+  protected insert(model:any,modelUrl:string){
+    return this.http.post(`${this.url}/${modelUrl}`,model);
   }
 
-  getAllProducts(categoryId: number):Observable<Product[]>{
+  protected getAllModel<T extends Model>(categoryId: Number):Observable<T[]>{
     return this.http.get(`${this.url}/product.json`).pipe(map((data)=>{
-      let products: Product[] = [];
+      let products: T[] = [];
 
       for(const key in data){
         if(categoryId && data[key].categoryId != categoryId)
@@ -32,14 +35,14 @@ export class HttpService{
     }));
   }
 
-  getOneProducts(firebaseId: string):Observable<Product>{
-    return this.http.get<Product>(`${this.url}/product/${firebaseId}.json`).pipe(map((data)=>{
-      let product: Product;
+  protected getOneModel<T extends Model>(firebaseId:String):Observable<T>{
+    return this.http.get<T>(`${this.url}/product/${firebaseId}.json`).pipe(map((data)=>{
+      let model: T;
 
-      product = data;
-      product.id = firebaseId;
+      model = data;
+      model.id = firebaseId;
 
-      return product;
+      return model;
     }))
   }
 }
