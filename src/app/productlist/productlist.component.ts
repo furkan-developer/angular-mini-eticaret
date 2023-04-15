@@ -4,12 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs';
 import { Product } from '../models/product';
 import { HttpService } from '../services/HttpService';
+import { ProductService } from '../services/product-service.service';
 
 @Component({
   selector: 'app-productlist',
   templateUrl: './productlist.component.html',
   styleUrls: ['./productlist.component.css'],
-  providers: [HttpService]
 })
 export class ProductlistComponent implements OnInit{
 
@@ -18,7 +18,7 @@ export class ProductlistComponent implements OnInit{
   products: Product[] = [];
   basket : Product[] = [];
 
-  constructor(private route: ActivatedRoute,private http: HttpService) {
+  constructor(private route: ActivatedRoute,private http: ProductService) {
   }
 
   ngOnInit(): void {
@@ -27,15 +27,12 @@ export class ProductlistComponent implements OnInit{
     });
   }
 
-  getAllProducts(categoryId: number){
-    this.http.getAllProducts(categoryId).subscribe((recivedData)=>{
-      this.products = recivedData;
-    });
+  async getAllProducts(categoryId: Number){
+    this.products = await this.http.getAllProducts(categoryId);
   }
 
-  getOneProduct(firebaseId: string){
-    this.http.getOneProducts(firebaseId).subscribe((recievedData)=>{
-    });
+  async getOneProduct(firebaseId: string){
+    return await this.http.getOneProduct(firebaseId);
   }
 
   addBasket(product: Product){

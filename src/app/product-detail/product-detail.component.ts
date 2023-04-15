@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/product';
 import { HttpService } from '../services/HttpService';
+import { ProductService } from '../services/product-service.service';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
-  providers: [HttpService]
 })
 export class ProductDetailComponent implements OnInit {
   product: Product;
 
-  constructor(private route: ActivatedRoute,private http:HttpService) {
+  constructor(private route: ActivatedRoute,private http:ProductService) {
   }
 
   ngOnInit(): void {
@@ -21,9 +21,7 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  getOneProducts(productId: string){
-    this.http.getOneProducts(productId).subscribe((recievedData)=>{
-      this.product = recievedData;
-    });
+  async getOneProducts(productId: string){
+   this.product = await this.http.getOneProduct(productId);
   }
 }
